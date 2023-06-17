@@ -57,16 +57,18 @@ In this comprehensive Django tutorial, you will learn how to build dynamic web a
      * An empty "wsgi.py" file, which is used for serving the Django project via the WSGI protocol.
      * A "manage.py" script, which provides a command-line interface for managing various aspects of the Django project.
  * The project directory is set up with a basic structure and configuration, allowing you to start developing your Django application within it.
-projectname/
-│
-├── projectname/
-│   ├── __init__.py
-│   ├── asgi.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-│
-└── manage.py
+ 
+- projectname/
+  - projectname/
+    - __init__.py
+    - asgi.py
+    - settings.py
+    - urls.py
+    - wsgi.py
+  - manage.py
+
+
+
 
 In Django, a <b>project</b> and an <b>app</b> are two distinct concepts:
 
