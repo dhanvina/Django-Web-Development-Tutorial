@@ -87,3 +87,36 @@ In Django, a <b>project</b> and an <b>app</b> are two distinct concepts:
  * You can create a Django app within a project using the <b>python manage.py startapp</b> command.
  * This command generates a directory for the app with a predefined structure and files such as models.py, views.py, and urls.py. You can then customize and extend the app according to your application's requirements.
  
+4. <b>python manage.py startapp app_name</b> - By using the command python manage.py startapp <app_name>, where <app_name> is the name you provide for your app, you will generate a new Django app within your project. This command performs the following actions:
+
+ * Creates a new directory for your app: The command creates a new directory with the specified <app_name>, this directory will contain all the files and modules specific to your app.
+
+ * Generates necessary files and directories: Inside the app directory, the command generates several files and directories with a predefined structure:
+
+   * __init__.py: This empty file indicates that the app directory is a Python package and allows other modules to be imported from within this directory.
+   * admin.py: This file is used for registering models with the Django admin interface. You can define how your app's models should be displayed and managed in the admin interface.
+   * apps.py: This file contains the app configuration, including the name and any additional settings specific to the app.
+   * models.py: This file is where you define your app's data models using Django's Object-Relational Mapping (ORM). You can define database tables, fields, relationships, and behavior of your app's data objects.
+   * tests.py: This file is meant for writing test cases for your app. You can define unit tests, integration tests, and other tests to ensure the functionality of your app.
+   * views.py: This file is used for defining the views or endpoints of your app. Views handle incoming requests, process data, and return responses.
+
+ * Registers the app in the project's settings: When you create a new app using startapp, it automatically adds the app to the project's list of installed apps in the settings.py file. This ensures that your app is recognized and integrated into the Django project.
+
+
+- project-name/
+  - app-name/
+    - migrations/
+      - __init__.py
+    - __init__.py
+    - admin.py
+    - apps.py
+    - models.py
+    - tests.py
+    - views.py
+  - project-name/
+    - __init__.py
+    - asgi.py
+    - settings.py
+    - urls.py
+    - wsgi.py
+  - manage.py
