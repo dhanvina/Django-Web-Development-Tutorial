@@ -57,5 +57,31 @@ In this comprehensive Django tutorial, you will learn how to build dynamic web a
      * An empty "wsgi.py" file, which is used for serving the Django project via the WSGI protocol.
      * A "manage.py" script, which provides a command-line interface for managing various aspects of the Django project.
  * The project directory is set up with a basic structure and configuration, allowing you to start developing your Django application within it.
+projectname/
+│
+├── projectname/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+│
+└── manage.py
 
+In Django, a <b>project</b> and an <b>app</b> are two distinct concepts:
+
+### Django Project:
+ * A Django project is a collection of settings, configurations, and applications that together form a complete web application.
+ * It serves as the container for your entire web application and encompasses the settings, URL configurations, database settings, and other project-level configurations.
+ * A Django project can contain multiple apps.
+ * When you create a Django project using the <b>django-admin startproject</b>. command, it generates the project's root directory along with essential files such as settings.py, urls.py, and manage.py.
+
+### Django App:
+ * A Django app is a modular component that encapsulates a specific functionality or feature of a web application.
+ * It represents a self-contained module within a Django project that provides a specific set of functionalities.
+ * Apps are typically designed to be reusable and can be plugged into different projects.
+ * An app can include models, views, templates, static files, and URL routing specific to its functionality.
+ * It can also contain other resources like forms, helpers, middleware, and management commands.
+ * You can create a Django app within a project using the <b>python manage.py startapp</b> command.
+ * This command generates a directory for the app with a predefined structure and files such as models.py, views.py, and urls.py. You can then customize and extend the app according to your application's requirements.
  
