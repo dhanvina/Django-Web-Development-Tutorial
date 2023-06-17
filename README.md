@@ -134,15 +134,123 @@ In Django, a <b>project</b> and an <b>app</b> are two distinct concepts:
 
 1. <b>python manage.py startapp testapp</b> - Again, it creates all the required files for the application.
 2. Go to projects/settings.py - 
-
-- INSTALLED_APPS = [
-    - 'django.contrib.admin',
-    - 'django.contrib.auth',
-    - 'django.contrib.contenttypes',
-    - 'django.contrib.sessions',
-    - 'django.contrib.messages',
-    - 'django.contrib.staticfiles',
-    - 'testapp', #add the appname 
-- ]
+```
+INSTALLED_APPS = [
+     'django.contrib.admin',
+     'django.contrib.auth',
+     'django.contrib.contenttypes',
+     'django.contrib.sessions',
+     'django.contrib.messages',
+     'django.contrib.staticfiles',
+     'testapp', #add the appname 
+ ]
+```
  * Adding the line 'testapp' to the INSTALLED_APPS list in settings.py is necessary to inform your Django project that the "hello_world" app exists and should be included in the project's functionality. This step is required for Django to recognize and load the app's components correctly.
                        
+3. we have to create a view:
+ * In Django, a view is a Python function or method that receives an HTTP request and returns an HTTP response.
+ *  It is responsible for handling the logic associated with a specific URL pattern and generating the appropriate response for that request.
+ * Views act as the intermediary between the user's request and the corresponding actions or data manipulations that need to be performed.
+ *  They define what happens when a particular URL is accessed by the user.
+ *  In Django, views can be defined in various ways:
+   * Function-based views: Views can be written as Python functions that take a request as the first parameter and return an HttpResponse or a subclass of HttpResponse.
+   * Class-based views: Views can be written as classes that inherit from Django's View or other specialized view classes. These classes provide methods that handle different HTTP methods (such as GET, POST, etc.) and encapsulate common functionality.
+   * Generic views: Django provides a set of pre-built generic views that simplify the creation of common views, such as list views, detail views, form views, and more. These views are often used for CRUD operations (Create, Retrieve, Update, Delete).
+   * Views can perform various tasks, including:
+     * Fetching data from a database or other data source.
+     * Processing user input or form submissions.
+     * Rendering HTML templates with dynamic data.
+     * Handling redirects or rendering JSON responses.
+     * Accessing session data or authentication information.
+     * Performing data manipulations or calculations.
+ * Navigate to views.py in testapp directory and add the code:
+ * ```
+    from django.shortcuts import render
+    def hello_world(request):
+         return render(request, 'hello_world.html', {})
+   ```
+ ```render(request, template_name, context=None, content_type=None, status=None, using=None)```
+   * request: The first parameter, request, represents the incoming HTTP request made by a user. It is required and specifies the request object.
+   * template_name: The second parameter, template_name, is a string that specifies the name of the template to be rendered. This can be a path to the template file or a template name registered with Django's template loader.
+   * context=None: The third parameter, context, is an optional parameter that specifies a dictionary containing the context variables to be passed to the template. Context variables provide data to be used within the template, such as dynamic content or data fetched from a database. If not provided, an empty dictionary {} is used as the default value.
+   * content_type=None: The content_type parameter is an optional parameter that specifies the content type of the response. It determines how the response is interpreted by the browser. If not provided, Django uses the default content type, which is 'text/html' for HTML responses.
+   * status=None: The status parameter is an optional parameter that specifies the HTTP status code for the response. If not provided, Django uses 200 (OK) as the default status code.
+   * using=None: The using parameter is an optional parameter used when working with multiple template engines. It specifies the name of the template engine to be used for rendering the template. If not provided, Django uses the default template engine specified in the project's settings.
+ * Example 1: Rendering a template without context variables 
+
+```
+from django.shortcuts import render
+
+def hello(request):
+    return render(request, 'hello.html')
+```
+In this example, the home() view function renders the template 'home.html' without passing any context variables. The rendered template will be returned as an HTTP response.
+ * Example 2: Rendering a template with context variables
+
+```
+from django.shortcuts import render
+
+def product_details(request, product_id):
+    product = get_product_by_id(product_id)
+    context = {'product': product}
+    return render(request, 'product_details.html', context)
+```
+In this example, the product_details() view function renders the template 'product_details.html' and passes a context variable named 'product' containing the details of a product. The context variable is accessed within the template to display dynamic content related to the specific product.
+ * Example 3: Rendering a template with a custom status code
+```
+from django.shortcuts import render
+
+def unauthorized(request):
+    return render(request, 'unauthorized.html', status=401)
+    
+```
+In this example, the unauthorized() view function renders the template 'unauthorized.html' and returns it as an HTTP response with a status code of 401 (Unauthorized). This can be used to indicate to the user that they are not authorized to access the requested resource.
+
+4. Create a templates folder under testapp directory which contains all the templates to be displayed. Example: html files.
+```
+mkdir testapp/templates/hello.html
+```
+```
+<h1>Hello User!!</h1>
+```
+Now we have created functions to handle users views and templates.
+5. Hookup URL's - 
+```
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('hello.urls')),
+]
+```
+  * from django.contrib import admin: This line imports the admin module from django.contrib. It allows you to include the Django admin site in your project.
+  * from django.urls import path, include: This line imports the path and include functions from django.urls module. The path function is used to define URL patterns, and the include function is used to include other URL configurations from other Django apps.
+  * urlpatterns = [...]: This is the list that holds all the URL patterns for your project. Each URL pattern is represented by an element in the list.
+  * path('admin/', admin.site.urls): This line defines the URL pattern for the Django admin site. It maps the URL admin/ to the admin site, which provides an interface to manage your project's data models and perform administrative tasks.
+  * path('', include('hello_world.urls')): This line includes the URL patterns from the 'hello_world.urls' module. It maps the root URL ('') to the URL patterns defined in the hello_world app. This allows you to handle requests to the root URL and delegate them to the URLs defined in the hello_world app for further processing.
+6. Create a urls.py file in your app, testapp:
+```
+from django.urls import path
+from hello_world import views
+
+urlpatterns = [
+    path('', views.hello, name='hello'),
+]
+```
+  * from django.urls import path: This line imports the path function from django.urls module. The path function is used to define URL patterns.
+  * from hello_world import views: This line imports the views module from the hello_world app. It assumes that you have a file named views.py inside the hello_world app directory, which contains the view functions.
+  * urlpatterns = [...]: This is the list that holds all the URL patterns for your project. Each URL pattern is represented by an element in the list.
+  * path('', views.hello_world, name='hello_world'): This line defines the URL pattern for the root URL (''). It maps the root URL to the hello_world view function defined in the views module. The name parameter is an optional argument that assigns a name to the URL pattern, allowing you to refer to it by name in other parts of your code, such as templates.
+
+7. Restart your server or python manage.py runserver
+
+![Screenshot (94)_WPS Photo](https://github.com/dhanvina/Django-Web-Development-Tutorial/assets/47035051/4811070b-6b67-41fd-bad1-6e4a3d0641d0)
+
+
+
+
+
+
+
+
