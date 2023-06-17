@@ -120,3 +120,13 @@ In Django, a <b>project</b> and an <b>app</b> are two distinct concepts:
     - urls.py
     - wsgi.py
   - manage.py
+
+5. <b>python manage.py runserver</b>: The command python manage.py runserver is used to start the development server provided by Django. When you run this command, it performs the following actions:
+ * Checks the project's configuration: The command checks the project's configuration files, such as settings.py, to ensure that all necessary settings are properly defined. This includes database settings, installed apps, middleware, static file configurations, and more.
+ * Sets up the development server: The command sets up a lightweight development server, which listens for incoming HTTP requests on a specified host and port. By default, the server listens on 127.0.0.1 (localhost) and port <b>8000</b>.
+ * Loads the Django project: The command loads your Django project, including the project-level settings, URL configurations, and other necessary components.
+ * Starts the development server: Once everything is set up, the command starts the development server, which is responsible for handling incoming HTTP requests and dispatching them to the appropriate Django views and URL patterns.
+ * Displays server information: After the server is successfully started, it displays information about the server, such as the host and port where it's running. It also provides information about the Django version and other relevant details.
+
+![Screenshot (93)_WPS Photo](https://github.com/dhanvina/Django-Web-Development-Tutorial/assets/47035051/4ca90df4-0106-4bb6-875b-4d42450ca9df)
+
