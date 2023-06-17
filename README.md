@@ -130,3 +130,19 @@ In Django, a <b>project</b> and an <b>app</b> are two distinct concepts:
 
 ![Screenshot (93)_WPS Photo](https://github.com/dhanvina/Django-Web-Development-Tutorial/assets/47035051/4ca90df4-0106-4bb6-875b-4d42450ca9df)
 
+## Let's create a small html file to display on your browser
+
+1. <b>python manage.py startapp testapp</b> - Again, it creates all the required files for the application.
+2. Go to projects/settings.py - 
+
+- INSTALLED_APPS = [
+    - 'django.contrib.admin',
+    - 'django.contrib.auth',
+    - 'django.contrib.contenttypes',
+    - 'django.contrib.sessions',
+    - 'django.contrib.messages',
+    - 'django.contrib.staticfiles',
+    - 'testapp', #add the appname 
+- ]
+ * Adding the line 'testapp' to the INSTALLED_APPS list in settings.py is necessary to inform your Django project that the "hello_world" app exists and should be included in the project's functionality. This step is required for Django to recognize and load the app's components correctly.
+                       
